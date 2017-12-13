@@ -15,7 +15,7 @@ namespace MYGOD539.Models.NumberCalculation
         public override DataTable CalcMethod(int year)
         {
             var table = operation.SelectPopularNum(year);
-            // operation.InsertProbability(table,year);
+            operation.InsertProbability(table,year);
 
             return table;
         }
