@@ -5,7 +5,7 @@ using System.Data;
 namespace MYGOD539.Helper
 {
     public class FileHelper{
-        public static void ExportCSV(DataTable table){
+        public static void ExportCSV(DataTable table,  string file){
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
 
             // builder.Append();
@@ -28,7 +28,6 @@ namespace MYGOD539.Helper
                     builder.Append(System.Environment.NewLine);
                 }
                 
-                string file = "D:\\Output.csv";
                 try{
                     if(File.Exists(file)) {
                         File.Delete(file);

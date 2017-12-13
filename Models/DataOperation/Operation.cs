@@ -87,6 +87,22 @@ namespace MYGOD539.Models.DataOperation
             }
         }
 
+        public void ClearTable(string tableName)
+        {
+            using(SQLiteConnection conn = new SQLiteConnection(this.ConnectionString)){
+                using(SQLiteCommand cmd = new SQLiteCommand(string.Concat("DELETE FROM ",tableName,";"),conn)){
+                    try{
+                        
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception err){
+                        throw err;
+                    }
+                }
+
+            }
+        }
     }
 
 

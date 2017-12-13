@@ -13,5 +13,7 @@ namespace MYGOD539.Models.DataOperation
 
         string SelectMax(string sql, SQLiteParameter[] collection);
 
+
+        void ClearTable(string tableName);
     }
 }

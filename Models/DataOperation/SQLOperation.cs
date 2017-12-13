@@ -70,6 +70,8 @@ namespace MYGOD539.Models.DataOperation
             int result = 0;
             // var table = this.SelectPopularNum(year);
 
+            operation.ClearTable("NumProbability");
+
             var parameters = new SQLiteParameter[3];
             SQLiteParameter p;
 

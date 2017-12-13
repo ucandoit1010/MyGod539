@@ -15,7 +15,13 @@ namespace MYGOD539
         {
             PopularNumber popular = new PopularNumber();
             var result = popular.CalcMethod(2017);
-            FileHelper.ExportCSV(result);
+            // FileHelper.ExportCSV(result,"D:\Output.csv");
+
+            var popularList = popular.GetFilterNumber(result,"Percent >= 12.5");
+            var unPopularList = popular.GetFilterNumber(result,"Percent < 12.5");
+
+            Console.WriteLine("Popular=" + string.Join(",",popularList));
+            Console.WriteLine("UnPopular=" + string.Join(",",unPopularList));
 
             Console.WriteLine("done");
         }
