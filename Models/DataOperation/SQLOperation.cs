@@ -11,6 +11,8 @@ namespace MYGOD539.Models.DataOperation
         private IOperation operation;
         private SQLiteParameter[] parameters;
 
+        private const int numbers = 39;
+
         public SQLOperation(){
             operation = new Operation();
         }
@@ -101,8 +103,38 @@ namespace MYGOD539.Models.DataOperation
             return result;
         }
 
+        public DataTable SelectOddEvenNum(int year){
+            DataTable table = new DataTable();
+            parameters = new SQLiteParameter[1];
+
+            var p = new SQLiteParameter();
+            p.ParameterName = "@Year";
+            p.DbType = System.Data.DbType.String;
+            p.Value = year - 1911;
+            parameters[0] = p;
+
+            table = operation.Select(ScriptHelper.GetScriptFromFile("GetHistoryByYear"),parameters);
+
+            DataColumn column = table.Columns.Add("Property", typeof(String));
+            column.Unique = false;
+            Number number;
+
+            for (int idx = 0; idx < table.Rows.Count ; idx++)
+            {
+                number = new Number();
+                number.num1 = int.Parse(table.Rows[idx]["open_num_1"].ToString());
+                number.num2 = int.Parse(table.Rows[idx]["open_num_2"].ToString());
+                number.num3 = int.Parse(table.Rows[idx]["open_num_3"].ToString());
+                number.num4 = int.Parse(table.Rows[idx]["open_num_4"].ToString());
+                number.num5 = int.Parse(table.Rows[idx]["open_num_5"].ToString());
+
+                table.Rows[idx]["Property"] = number.GetOddOrEven();
+            }
+            return table;
+        }
+
+
         public DataTable SelectPopularNum(int year) {
-            const int numbers = 39;
             int numTimes = 0;
             double data = 0.0;
             DataTable table = new DataTable();

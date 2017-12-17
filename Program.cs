@@ -13,15 +13,26 @@ namespace MYGOD539
     {
         static void Main(string[] args)
         {
-            PopularNumber popular = new PopularNumber();
-            var result = popular.CalcMethod(2017);
-            // FileHelper.ExportCSV(result,"D:\Output.csv");
+            #region 奇偶
+            OddOrEvenNumber number = new OddOrEvenNumber();
+            var result = number.CalcMethod(2017);
+            FileHelper.ExportCSV(result,@"D:\OddOrEven.csv");
 
-            var popularList = popular.GetFilterNumber(result,"Percent >= 12.5");
-            var unPopularList = popular.GetFilterNumber(result,"Percent < 12.5");
 
-            Console.WriteLine("Popular=" + string.Join(",",popularList));
-            Console.WriteLine("UnPopular=" + string.Join(",",unPopularList));
+            #endregion
+
+            #region 熱門
+            // PopularNumber popular = new PopularNumber();
+            // 機率統計
+            // var result = popular.CalcMethod(2017);
+            // FileHelper.ExportCSV(result,@"D:\Output.csv");
+
+            // var popularList = popular.GetFilterNumber(result,"Percent >= 12.5");
+            // var unPopularList = popular.GetFilterNumber(result,"Percent < 12.5");
+
+            // Console.WriteLine("Popular=" + string.Join(",",popularList));
+            // Console.WriteLine("UnPopular=" + string.Join(",",unPopularList));
+            #endregion
 
             Console.WriteLine("done");
         }
