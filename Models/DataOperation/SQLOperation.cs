@@ -104,7 +104,7 @@ namespace MYGOD539.Models.DataOperation
         }
 
         public DataTable SelectOddEvenNum(int year){
-            DataTable table = this.SelectHistory(year);
+            DataTable table = this.SelectHistory(year,true);
             DataColumn column = table.Columns.Add("Property", typeof(String));
             column.Unique = false;
             Number number;
@@ -169,8 +169,9 @@ namespace MYGOD539.Models.DataOperation
             return int.Parse(result.Substring(result.Length - 3,3));
         }
 
-        public DataTable SelectHistory(int year) {
+        public DataTable SelectHistory(int year , bool orderBy) {
             DataTable table;
+            int[] data = new int[5];
             parameters = new SQLiteParameter[1];
 
             var p = new SQLiteParameter();
@@ -180,6 +181,27 @@ namespace MYGOD539.Models.DataOperation
             parameters[0] = p;
 
             table = operation.Select(ScriptHelper.GetScriptFromFile("GetHistoryByYear"),parameters);
+
+            //排序五個數字
+            if(orderBy){
+                
+                for (int idx = 0; idx < table.Rows.Count ; idx++)
+                {
+                    data[0] = int.Parse(table.Rows[idx]["open_num_1"].ToString());
+                    data[1] = int.Parse(table.Rows[idx]["open_num_2"].ToString());
+                    data[2] = int.Parse(table.Rows[idx]["open_num_3"].ToString());
+                    data[3] = int.Parse(table.Rows[idx]["open_num_4"].ToString());
+                    data[4] = int.Parse(table.Rows[idx]["open_num_5"].ToString());
+
+                    Array.Sort(data);
+
+                    table.Rows[idx]["open_num_1"] = data[0];
+                    table.Rows[idx]["open_num_2"] = data[1];
+                    table.Rows[idx]["open_num_3"] = data[2];
+                    table.Rows[idx]["open_num_4"] = data[3];
+                    table.Rows[idx]["open_num_5"] = data[4];
+                }
+            }
 
             return table;
         }
