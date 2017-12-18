@@ -25,7 +25,7 @@ namespace MYGOD539
             // PopularNumber popular = new PopularNumber();
             // 機率統計
             // var result = popular.CalcMethod(2017);
-            // FileHelper.ExportCSV(result,@"D:\Output.csv");
+            // FileHelper.ExportCSV(result,@"D:\Output-Popular.csv");
 
             // var popularList = popular.GetFilterNumber(result,"Percent >= 12.5");
             // var unPopularList = popular.GetFilterNumber(result,"Percent < 12.5");

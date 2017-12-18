@@ -104,17 +104,7 @@ namespace MYGOD539.Models.DataOperation
         }
 
         public DataTable SelectOddEvenNum(int year){
-            DataTable table = new DataTable();
-            parameters = new SQLiteParameter[1];
-
-            var p = new SQLiteParameter();
-            p.ParameterName = "@Year";
-            p.DbType = System.Data.DbType.String;
-            p.Value = year - 1911;
-            parameters[0] = p;
-
-            table = operation.Select(ScriptHelper.GetScriptFromFile("GetHistoryByYear"),parameters);
-
+            DataTable table = this.SelectHistory(year);
             DataColumn column = table.Columns.Add("Property", typeof(String));
             column.Unique = false;
             Number number;
@@ -179,6 +169,21 @@ namespace MYGOD539.Models.DataOperation
             return int.Parse(result.Substring(result.Length - 3,3));
         }
 
+        public DataTable SelectHistory(int year) {
+            DataTable table;
+            parameters = new SQLiteParameter[1];
+
+            var p = new SQLiteParameter();
+            p.ParameterName = "@Year";
+            p.DbType = System.Data.DbType.String;
+            p.Value = year - 1911;
+            parameters[0] = p;
+
+            table = operation.Select(ScriptHelper.GetScriptFromFile("GetHistoryByYear"),parameters);
+
+            return table;
+        }
+         
     }
 
 }
